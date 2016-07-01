@@ -14,7 +14,7 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('instructor_id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('subject_id');
             $table->unsignedInteger('room_id');
             $table->string('from_time');
@@ -25,12 +25,12 @@ class CreateSchedulesTable extends Migration
 
             $table->foreign('subject_id')
                 ->references('id')->on('subjects')
-                ->onDelete('cascade');;
+                ->onDelete('cascade');
             $table->foreign('room_id')
                 ->references('id')->on('rooms')
-                ->onDelete('cascade');;
-            $table->foreign('instructor_id')
-                ->references('id')->on('instructors')
+                ->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onDelete('cascade');
 
 
