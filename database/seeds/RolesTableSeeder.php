@@ -13,7 +13,7 @@ class RolesTableSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('roles')->truncate();
-        DB::table('role_users')->truncate();
+        DB::table('role_user')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         DB::table('roles')->insert([
@@ -26,13 +26,7 @@ class RolesTableSeeder extends Seeder
             [
                 'id'           => 2,
                 'name'         => 'admin',
-                'display_name' => 'Admin User Role',
-                'description'  => ''
-            ],
-            [
-                'id'           => 3,
-                'name'         => 'dean',
-                'display_name' => 'Dean User Role',
+                'display_name' => 'Admin/Dean User Role',
                 'description'  => ''
             ],
             [

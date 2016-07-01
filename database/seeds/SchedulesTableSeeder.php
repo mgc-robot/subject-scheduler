@@ -16,7 +16,7 @@ class SchedulesTableSeeder extends Seeder
         DB::table('schedules')->insert([
             [
                 'id'         => 1,
-                'user_id'    => 1,
+                'user_id'    => 3,
                 'subject_id' => 1,
                 'room_id'    => 1,
                 'from_time'  => '7:30 PM',
@@ -25,7 +25,7 @@ class SchedulesTableSeeder extends Seeder
             ],
             [
                 'id'         => 2,
-                'user_id'    => 2,
+                'user_id'    => 4,
                 'subject_id' => 1,
                 'room_id'    => 2,
                 'from_time'  => '8:00 AM',
@@ -34,7 +34,7 @@ class SchedulesTableSeeder extends Seeder
             ],
             [
                 'id'         => 3,
-                'user_id'    => 1,
+                'user_id'    => 5,
                 'subject_id' => 2,
                 'room_id'    => 3,
                 'from_time'  => '9:30 AM',
@@ -43,7 +43,7 @@ class SchedulesTableSeeder extends Seeder
             ],
             [
                 'id'         => 4,
-                'user_id'    => 4,
+                'user_id'    => 6,
                 'subject_id' => 3,
                 'room_id'    => 1,
                 'from_time'  => '12:30 PM',
@@ -52,7 +52,7 @@ class SchedulesTableSeeder extends Seeder
             ],
             [
                 'id'         => 5,
-                'user_id'    => 3,
+                'user_id'    => 7,
                 'subject_id' => 3,
                 'room_id'    => 3,
                 'from_time'  => '7:30 AM',
@@ -61,7 +61,7 @@ class SchedulesTableSeeder extends Seeder
             ],
             [
                 'id'         => 6,
-                'user_id'    => 6,
+                'user_id'    => 8,
                 'subject_id' => 2,
                 'room_id'    => 1,
                 'from_time'  => '2:30 PM',
@@ -70,7 +70,7 @@ class SchedulesTableSeeder extends Seeder
             ],
             [
                 'id'         => 7,
-                'user_id'    => 7,
+                'user_id'    => 3,
                 'subject_id' => 1,
                 'room_id'    => 1,
                 'from_time'  => '9:30 AM',
@@ -79,7 +79,7 @@ class SchedulesTableSeeder extends Seeder
             ],
             [
                 'id'         => 8,
-                'user_id'    => 5,
+                'user_id'    => 4,
                 'subject_id' => 1,
                 'room_id'    => 1,
                 'from_time'  => '9:30 AM',
