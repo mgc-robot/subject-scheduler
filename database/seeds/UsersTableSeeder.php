@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Eloquent\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,10 +38,10 @@ class UsersTableSeeder extends Seeder
             'gender'     => 'm'
         ];
 
-        $userRoot = new User($dataAdmin);
-        $userRoot->save();
+        $userAdmin = new User($dataAdmin);
+        $userAdmin->save();
 
-        $userRoot->attachRole(2);
+        $userAdmin->attachRole(2);
         $dataInstructor =
             [
                 [
@@ -95,14 +95,14 @@ class UsersTableSeeder extends Seeder
             ];
 
         foreach ($dataInstructor as $instructor) {
-            $userRoot = new User($instructor);
-            $userRoot->save();
+            $userInstructor = new User($instructor);
+            $userInstructor->save();
 
-            $userRoot->attachRole(3);
+            $userInstructor->attachRole(3);
         }
 
         $dataStudent = [
-            'id'         => 8,
+            'id'         => 9,
             'email'      => 'test_student@gmail.com',
             'password'   => Hash::make('password'),
             'first_name' => 'Jon student',
@@ -110,9 +110,9 @@ class UsersTableSeeder extends Seeder
             'gender'     => 'm'
         ];
 
-        $userRoot = new User($dataStudent);
-        $userRoot->save();
+        $userStudent = new User($dataStudent);
+        $userStudent->save();
 
-        $userRoot->attachRole(4);
+        $userStudent->attachRole(4);
     }
 }
