@@ -4,6 +4,6 @@ namespace App\Eloquent;
 
 use Zizaco\Entrust\EntrustPermission;
 
-class Permission extends EntrustPermission
+class Role extends EntrustPermission
 {
 }
