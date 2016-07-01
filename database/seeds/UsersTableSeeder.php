@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -13,15 +14,23 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->delete();
 
+        $dataRoot = [
+            'id'         => 1,
+            'email'      => 'footless@demo.com',
+            'username'   => 'footless',
+            'password'   => Hash::make('password'),
+            'first_name' => 'Footless',
+            'last_name'  => 'Hero',
+            'gender'     => 'm'
+        ];
+
+        $userRoot = new User($dataRoot);
+        $userRoot->save();
+
+//        $userRoot->attachRole(1);
         DB::table('users')->insert([
             [
-                'id'         => 1,
-                'email'      => 'footless@demo.com',
-                'username'   => 'footless',
-                'password'   => Hash::make('password'),
-                'first_name' => 'Footless',
-                'last_name'  => 'Hero',
-                'gender'     => 'm'
+
             ],
             [
                 'id'         => 2,
