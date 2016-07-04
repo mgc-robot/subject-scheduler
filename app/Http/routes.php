@@ -14,3 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+$api = app('Dingo\Api\Routing\Router');
+
+// Version 1 of subject scheduler API
+
+$api->version('v1', function ($api) {
+
+    //Set our namespace for the underlying routes
+//    $api->group(['namespace' => 'App\HTTP\Controllers', 'middleware' => '\Barryvdh\Cors\HandleCors::class'],
+    $api->group(['namespace' => 'App\HTTP\Controllers'], function ($api) {
+
+//            $api->post('login', 'Auth\AuthController@login');
+//            $api->get('wff_user', 'Auth\Controller@getAuthenticatedUser');
+//        $api->group(['middleware' => 'jwt.entrust.role:root'], function ($api) {
+//            $api->get('user', 'Auth\AuthController@getAuthenticatedUser');
+//            $api->get('validate_token', 'Auth\AuthController@validateToken');
+//        });
+    });
+});
