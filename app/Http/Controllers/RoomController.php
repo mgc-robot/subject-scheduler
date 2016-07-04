@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DeleteRequest;
 use App\Http\Requests\RoomRequest;
 use App\Repository\RoomRepository;
+use App\Transformers\RoomTransformer;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,12 @@ class RoomController extends BaseController
 {
 
     protected $roomRepository;
+    protected $roomTransformer;
 
-    public function __construct(RoomRepository $roomRepository)
+    public function __construct(RoomRepository $roomRepository, RoomTransformer $roomTransformer)
     {
         $this->roomRepository = $roomRepository;
+        $this->roomTransformer = $roomTransformer;
     }
 
     /**
@@ -29,15 +32,16 @@ class RoomController extends BaseController
     public function index(Request $request)
     {
         try {
-            $limit = $request->get('limit') ?: '15';
+            $limit = $request->get('limit') ?: 15;
             $room = $this->roomRepository->paginate($limit);
+
             if (!$room->isEmpty()) {
-                return response()->json($room, true);
-            } else {
-                return response()->json('No data found.', 404);
+                return $this->collection($room, new $this->roomTransformer);
             }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return response()->json($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -61,9 +65,9 @@ class RoomController extends BaseController
                 $room = $this->roomRepository->create($data);
             }
 
-            return response()->json($room);
+            return $this->item($room, new $this->roomTransformer);
         } catch (Exception $e) {
-            return response()->json($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -78,12 +82,12 @@ class RoomController extends BaseController
         try {
             $room = $this->roomRepository->findBy('id', $id);
             if ($room) {
-                return response()->json($room);
-            } else {
-                return response()->json('can\'t find data', 404);
+                return $this->item($room, new $this->roomTransformer);
             }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return response()->json($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -96,9 +100,14 @@ class RoomController extends BaseController
     public function destroy(DeleteRequest $request)
     {
         try {
-            return response()->json($this->roomRepository->delete($request->get('id')));
+            $room = $this->roomRepository->delete($request->get('id'));
+            if ($room) {
+                return $this->item($room, new $this->roomTransformer);
+            }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return response()->json($e, 500);
+            return $this->errorInternal($e);
         }
     }
 }
