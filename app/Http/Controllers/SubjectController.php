@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DeleteRequest;
 use App\Http\Requests\SubjectRequest;
 use App\Repository\SubjectRepository;
+use App\Transformers\SubjectTransformer;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,12 @@ class SubjectController extends BaseController
 {
 
     protected $subjectRepository;
+    protected $subjectTransformer;
 
-    public function __construct(SubjectRepository $subjectRepository)
+    public function __construct(SubjectRepository $subjectRepository, SubjectTransformer $subjectTransformer)
     {
         $this->subjectRepository = $subjectRepository;
+        $this->subjectTransformer = $subjectTransformer;
     }
 
     /**
@@ -32,12 +35,12 @@ class SubjectController extends BaseController
             $limit = $request->get('limit') ?: 15;
             $subject = $this->subjectRepository->paginate($limit);
             if (!$subject->isEmpty()) {
-                return $this->xhr($subject, true);
-            } else {
-                return $this->xhr('No data found.', 404);
+                return $this->collection($subject, new $this->subjectTransformer);
             }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -66,9 +69,9 @@ class SubjectController extends BaseController
                 $subject = $this->subjectRepository->create($data);
             }
 
-            return $this->xhr($subject);
+            return $this->item($subject, new $this->subjectTransformer);
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -83,12 +86,12 @@ class SubjectController extends BaseController
         try {
             $subject = $this->subjectRepository->with('instructor', 'schedules')->where('id', '=', $id)->get();
             if (!$subject->isEmpty()) {
-                return $this->xhr($subject);
-            } else {
-                return $this->xhr('cant\'t find data', 404);
+                return $this->xhr($subject, new $this->subjectTransformer);
             }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -102,10 +105,13 @@ class SubjectController extends BaseController
     {
         try {
             $subject = $this->subjectRepository->delete($request->get('id'));
+            if ($subject) {
+                return $this->item($subject, new $this->subjectTransformer);
+            }
 
-            return $this->xhr($subject);
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->errorInternal($e);
         }
     }
 }

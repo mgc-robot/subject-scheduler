@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DeleteRequest;
 use App\Http\Requests\UserRequest;
 use App\Repository\UserRepository;
+use App\Transformers\UserTransformer;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -15,10 +16,12 @@ class UserController extends BaseController
 {
 
     protected $userRepository;
+    protected $userTransformer;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, UserTransformer $userTransformer)
     {
         $this->userRepository = $userRepository;
+        $this->userTransformer = $userTransformer;
     }
 
     /**
@@ -31,12 +34,12 @@ class UserController extends BaseController
         try {
             $user = $this->userRepository->all();
             if (!$user->isEmpty()) {
-                return $this->xhr($user);
-            } else {
-                return $this->xhr('No data found.', 404);
+                return $this->collection($user, new $this->userTransformer);
             }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -66,9 +69,9 @@ class UserController extends BaseController
             }
 
 
-            return $this->xhr($user);
+            return $this->item($user, new $this->userTransformer);
         } catch (Exception $e) {
-            return $this->xhr($e);
+            return $this->errorInternal($e);
         }
     }
 
@@ -83,12 +86,12 @@ class UserController extends BaseController
         try {
             $user = $this->userRepository->findBy('username', $username);
             if ($user) {
-                return $this->xhr($user);
-            } else {
-                return $this->xhr('can\'t find data', 404);
+                return $this->item($user, new $this->userTransformer);
             }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -103,10 +106,13 @@ class UserController extends BaseController
     {
         try {
             $user = $this->userRepository->delete($request->get('id'));
+            if ($user) {
+                return $this->item($user, new $this->userTransformer);
+            }
 
-            return $this->xhr($user);
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->errorInternal($e);
         }
     }
 }

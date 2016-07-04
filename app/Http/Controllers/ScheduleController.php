@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DeleteRequest;
 use App\Http\Requests\ScheduleRequest;
 use App\Repository\ScheduleRepository;
+use App\Transformers\ScheduleTransformer;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -15,10 +16,12 @@ class ScheduleController extends BaseController
 {
 
     protected $scheduleRepository;
+    protected $scheduleTransformer;
 
-    public function __construct(ScheduleRepository $scheduleRepository)
+    public function __construct(ScheduleRepository $scheduleRepository, ScheduleTransformer $scheduleTransformer)
     {
         $this->scheduleRepository = $scheduleRepository;
+        $this->scheduleTransformer = $scheduleTransformer;
     }
 
     /**
@@ -33,12 +36,12 @@ class ScheduleController extends BaseController
             $limit = $request->get('limit') ?: 15;
             $schedule = $this->scheduleRepository->with('instructors', 'subjects', 'rooms')->paginate($limit);
             if (!$schedule->isEmpty()) {
-                return $this->xhr($schedule, true);
-            } else {
-                return $this->xhr('No data found.', 404);
+                return $this->collection($schedule, new $this->scheduleTransformer);
             }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->errorInternal($e);
         }
     }
 
@@ -70,9 +73,9 @@ class ScheduleController extends BaseController
                 $schedule = $this->scheduleRepository->create($data);
             }
 
-            return $this->xhr($schedule);
+            return $this->item($schedule, new $this->scheduleTransformer);
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->erorrInternal($e);
         }
     }
 
@@ -88,12 +91,12 @@ class ScheduleController extends BaseController
             $schedule = $this->scheduleRepository->with('instructors', 'subjects', 'rooms')->where('id', '=',
                 $id)->get();
             if (!$schedule->isEmpty()) {
-                return $this->xhr($schedule);
+                return $this->item($schedule, new $this->scheduleTransformer);
             } else {
-                return $this->xhr('can\'t find data', 404);
+                return $this->errorBadRequest();
             }
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->erorrInternal($e);
         }
     }
 
@@ -109,9 +112,13 @@ class ScheduleController extends BaseController
         try {
             $schedule = $this->scheduleRepository->delete($request->get('id'));
 
-            return $this->xhr($schedule);
+            if ($schedule) {
+                return $this->item($schedule, new $this->scheduleTransformer);
+            }
+
+            return $this->errorBadRequest();
         } catch (Exception $e) {
-            return $this->xhr($e, 500);
+            return $this->erorrInternal($e);
         }
     }
 }

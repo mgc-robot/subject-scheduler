@@ -9,6 +9,7 @@
         "laravel/framework": "5.2.*",
         "phpdocumentor/reflection": "3.x@dev",
         "dingo/api": "1.0.x@dev",
+        "barryvdh/laravel-cors": "^0.7.1",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
