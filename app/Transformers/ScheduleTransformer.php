@@ -18,7 +18,10 @@ class ScheduleTransformer extends TransformerAbstract
             'day'        => $schedule->day,
             'created_by' => $schedule->created_by,
             'updated_by' => $schedule->updated_by,
-            'created_at' => $schedule->created_at->diffForHumans()
+            'created_at' => $schedule->created_at->diffForHumans(),
+            'users'      => $schedule->users,
+            'subjects'   => $schedule->subjects,
+            'rooms'      => $schedule->rooms
         ];
     }
 }
