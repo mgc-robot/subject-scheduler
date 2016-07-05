@@ -1,6 +1,7 @@
 <?php
 
 use App\Eloquent\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,7 +22,10 @@ class UsersTableSeeder extends Seeder
             'password'   => Hash::make('password'),
             'first_name' => 'Mark Gerald',
             'last_name'  => 'Cabatingan',
-            'gender'     => 'm'
+            'gender'     => 'm',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+
         ];
 
         $userRoot = new User($dataRoot);
@@ -35,7 +39,10 @@ class UsersTableSeeder extends Seeder
             'password'   => Hash::make('password'),
             'first_name' => 'Footless',
             'last_name'  => 'Hero',
-            'gender'     => 'm'
+            'gender'     => 'm',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+
         ];
 
         $userAdmin = new User($dataAdmin);
@@ -50,7 +57,10 @@ class UsersTableSeeder extends Seeder
                     'password'   => Hash::make('password'),
                     'first_name' => 'Jon 1',
                     'last_name'  => 'Doe',
-                    'gender'     => 'm'
+                    'gender'     => 'm',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+
                 ],
                 [
                     'id'         => 4,
@@ -58,7 +68,10 @@ class UsersTableSeeder extends Seeder
                     'password'   => Hash::make('password'),
                     'first_name' => 'Jon 2',
                     'last_name'  => 'Snow',
-                    'gender'     => 'm'
+                    'gender'     => 'm',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+
                 ],
                 [
                     'id'         => 5,
@@ -66,7 +79,10 @@ class UsersTableSeeder extends Seeder
                     'password'   => Hash::make('password'),
                     'first_name' => 'Jon 3',
                     'last_name'  => 'Snow',
-                    'gender'     => 'm'
+                    'gender'     => 'm',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+
                 ],
                 [
                     'id'         => 6,
@@ -74,7 +90,10 @@ class UsersTableSeeder extends Seeder
                     'password'   => Hash::make('password'),
                     'first_name' => 'Jon 4',
                     'last_name'  => 'Snow',
-                    'gender'     => 'm'
+                    'gender'     => 'm',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+
                 ],
                 [
                     'id'         => 7,
@@ -82,7 +101,10 @@ class UsersTableSeeder extends Seeder
                     'password'   => Hash::make('password'),
                     'first_name' => 'Jon 5',
                     'last_name'  => 'Snow',
-                    'gender'     => 'm'
+                    'gender'     => 'm',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+
                 ],
                 [
                     'id'         => 8,
@@ -90,7 +112,10 @@ class UsersTableSeeder extends Seeder
                     'password'   => Hash::make('password'),
                     'first_name' => 'Jon 6',
                     'last_name'  => 'Snow',
-                    'gender'     => 'm'
+                    'gender'     => 'm',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+
                 ]
             ];
 
@@ -107,7 +132,10 @@ class UsersTableSeeder extends Seeder
             'password'   => Hash::make('password'),
             'first_name' => 'Jon student',
             'last_name'  => 'Snow',
-            'gender'     => 'm'
+            'gender'     => 'm',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+
         ];
 
         $userStudent = new User($dataStudent);

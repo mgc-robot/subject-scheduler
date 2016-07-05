@@ -33,13 +33,10 @@ class ScheduleController extends BaseController
     public function index(Request $request)
     {
         try {
-            $limit = $request->get('limit') ?: 15;
-            $schedule = $this->scheduleRepository->with('instructors', 'subjects', 'rooms')->paginate($limit);
-            if (!$schedule->isEmpty()) {
-                return $this->collection($schedule, new $this->scheduleTransformer);
-            }
+            $limit = $request->get('limit') ?: env('PAGE_LIMIT', 15);
+            $schedule = $this->scheduleRepository->paginate($limit);
 
-            return $this->errorBadRequest();
+            return $this->paginator($schedule, new $this->scheduleTransformer);
         } catch (Exception $e) {
             return $this->errorInternal($e);
         }

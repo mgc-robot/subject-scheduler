@@ -32,13 +32,10 @@ class SubjectController extends BaseController
     public function index(Request $request)
     {
         try {
-            $limit = $request->get('limit') ?: 15;
+            $limit = $request->get('limit') ?: env('PAGE_LIMIT', 15);
             $subject = $this->subjectRepository->paginate($limit);
-            if (!$subject->isEmpty()) {
-                return $this->collection($subject, new $this->subjectTransformer);
-            }
 
-            return $this->errorBadRequest();
+            return $this->paginator($subject, new $this->subjectTransformer);
         } catch (Exception $e) {
             return $this->errorInternal($e);
         }

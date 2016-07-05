@@ -33,11 +33,8 @@ class UserController extends BaseController
     {
         try {
             $user = $this->userRepository->all();
-            if (!$user->isEmpty()) {
-                return $this->collection($user, new $this->userTransformer);
-            }
 
-            return $this->errorBadRequest();
+            return $this->collection($user, new $this->userTransformer);
         } catch (Exception $e) {
             return $this->errorInternal($e);
         }

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class SchedulesTableSeeder extends Seeder
@@ -21,7 +22,10 @@ class SchedulesTableSeeder extends Seeder
                 'room_id'    => 1,
                 'from_time'  => '7:30 PM',
                 'to_time'    => '8:30 PM',
-                'day'        => 'MWF'
+                'day'        => 'MWF',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
             ],
             [
                 'id'         => 2,
@@ -30,7 +34,10 @@ class SchedulesTableSeeder extends Seeder
                 'room_id'    => 2,
                 'from_time'  => '8:00 AM',
                 'to_time'    => '9:00 AM',
-                'day'        => 'MWF'
+                'day'        => 'MWF',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
             ],
             [
                 'id'         => 3,
@@ -39,7 +46,10 @@ class SchedulesTableSeeder extends Seeder
                 'room_id'    => 3,
                 'from_time'  => '9:30 AM',
                 'to_time'    => '10:30 AM',
-                'day'        => 'MWF'
+                'day'        => 'MWF',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
             ],
             [
                 'id'         => 4,
@@ -48,7 +58,10 @@ class SchedulesTableSeeder extends Seeder
                 'room_id'    => 1,
                 'from_time'  => '12:30 PM',
                 'to_time'    => '1:30 PM',
-                'day'        => 'MWF'
+                'day'        => 'MWF',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
             ],
             [
                 'id'         => 5,
@@ -57,7 +70,10 @@ class SchedulesTableSeeder extends Seeder
                 'room_id'    => 3,
                 'from_time'  => '7:30 AM',
                 'to_time'    => '8:30 AM',
-                'day'        => 'MWF'
+                'day'        => 'MWF',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
             ],
             [
                 'id'         => 6,
@@ -66,7 +82,10 @@ class SchedulesTableSeeder extends Seeder
                 'room_id'    => 1,
                 'from_time'  => '2:30 PM',
                 'to_time'    => '3:30 PM',
-                'day'        => 'MWF'
+                'day'        => 'MWF',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
             ],
             [
                 'id'         => 7,
@@ -75,7 +94,10 @@ class SchedulesTableSeeder extends Seeder
                 'room_id'    => 1,
                 'from_time'  => '9:30 AM',
                 'to_time'    => '10:30 AM',
-                'day'        => 'MWF'
+                'day'        => 'MWF',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
             ],
             [
                 'id'         => 8,
@@ -84,7 +106,10 @@ class SchedulesTableSeeder extends Seeder
                 'room_id'    => 1,
                 'from_time'  => '9:30 AM',
                 'to_time'    => '10:30 AM',
-                'day'        => 'MWF'
+                'day'        => 'MWF',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+
             ]
         ]);
     }
