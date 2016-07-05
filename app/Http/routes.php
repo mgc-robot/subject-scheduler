@@ -24,7 +24,7 @@ $api->version('v1', function ($api) {
 
     //Set our namespace for the underlying routes
 //    $api->group(['namespace' => 'App\HTTP\Controllers', 'middleware' => '\Barryvdh\Cors\HandleCors::class'],
-    $api->group(['namespace' => 'App\HTTP\Controllers'], function ($api) {
+    $api->group(['namespace' => 'App\Http\Controllers'], function ($api) {
 
 //            $api->post('login', 'Auth\AuthController@login');
 //            $api->get('wff_user', 'Auth\Controller@getAuthenticatedUser');
@@ -32,5 +32,38 @@ $api->version('v1', function ($api) {
 //            $api->get('user', 'Auth\AuthController@getAuthenticatedUser');
 //            $api->get('validate_token', 'Auth\AuthController@validateToken');
 //        });
+
+        $api->group(['prefix' => 'rooms'], function ($api) {
+            $api->post('/', 'RoomController@store');
+            $api->get('/', 'RoomController@index');
+            $api->get('/{id}', 'RoomController@show');
+            $api->put('/{id}', 'RoomController@store');
+            $api->delete('/{id}', 'RoomController@destroy');
+        });
+
+        $api->group(['prefix' => 'schedules'], function ($api) {
+            $api->post('/', 'ScheduleController@store');
+            $api->get('/', 'ScheduleController@index');
+            $api->get('/{id}', 'ScheduleController@show');
+            $api->put('/{id}', 'ScheduleController@store');
+            $api->delete('/{id}', 'ScheduleController@destroy');
+        });
+
+        $api->group(['prefix' => 'subjects'], function ($api) {
+            $api->post('/', 'SubjectController@store');
+            $api->get('/', 'SubjectController@index');
+            $api->get('/{id}', 'SubjectController@show');
+            $api->put('/{id}', 'SubjectController@store');
+            $api->delete('/{id}', 'SubjectController@destroy');
+        });
+
+        $api->group(['prefix' => 'users'], function ($api) {
+            $api->post('/', 'UserController@store');
+            $api->get('/', 'UserController@index');
+            $api->get('/{id}', 'UserController@show');
+            $api->put('/{id}', 'UserController@store');
+            $api->delete('/{id}', 'UserController@destroy');
+        });
+
     });
 });
