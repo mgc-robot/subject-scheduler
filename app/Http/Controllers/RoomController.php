@@ -32,14 +32,10 @@ class RoomController extends BaseController
     public function index(Request $request)
     {
         try {
-            $limit = $request->get('limit') ?: 15;
+            $limit = $request->get('limit') ?: env('PAGE_LIMIT', 15);
             $room = $this->roomRepository->paginate($limit);
 
-            if (!$room->isEmpty()) {
-                return $this->collection($room, new $this->roomTransformer);
-            }
-
-            return $this->errorBadRequest();
+            return $this->paginator($room, new $this->roomTransformer);
         } catch (Exception $e) {
             return $this->errorInternal($e);
         }
