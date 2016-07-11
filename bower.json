@@ -1,0 +1,28 @@
+{
+  "name": "subject-scheduler",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Mark Gerald Cabatingan <markgerald.nst@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "subject"
+  ],
+  "homepage": "https://github.com/mgc-robot/subject-scheduler",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.7",
+    "font-awesome": "fontawesome#~4.6.0",
+    "bootstrap-sass": "~3.3.6"
+  }
+}
