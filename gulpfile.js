@@ -23,11 +23,19 @@ elixir(function (mix) {
 
     mix.copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts/bootstrap')
         .copy(paths.fontawesome + 'fonts/**', 'public/fonts/fontawesome');
+    mix.styles([
+        'resources/assets/css/custom/style.css',
+        'resources/assets/css/custom/navbar.css',
+        'public/css/app-temp.css'
+    ], 'public/css/app.css', './');
 
     mix.scripts([
         paths.angular + 'angular.js',
         paths.bootstrap + 'javascripts/bootstrap.js',
-        paths.jquery + 'dist/jquery.js'
+        paths.jquery + 'dist/jquery.js',
+        'resources/assets/js/custom/date.js',
+        'resources/assets/js/custom/wired.js'
+
     ], 'public/js/vendor.js');
 
 });
