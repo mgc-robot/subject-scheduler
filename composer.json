@@ -10,7 +10,8 @@
         "phpdocumentor/reflection": "3.x@dev",
         "dingo/api": "1.0.x@dev",
         "barryvdh/laravel-cors": "^0.7.1",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "5.2.x-dev",
+        "tymon/jwt-auth": "0.5.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
